@@ -70,6 +70,7 @@ A formal A/B comparison using identical seeds and evaluation settings is still n
 ## Reproducibility Notes
 
 Experiments were run using the `w19d4_starter.py` script.
+Final A/B evaluation was executed using `final_eval_qlearning.py`.
 
 Hyperparameter optimization was performed using Optuna with varying numbers of trials
 (25–120) and increased episode budgets to allow convergence.
@@ -90,3 +91,25 @@ Next Steps
 Final Reflection
 
 This week emphasized learning why certain configurations work rather than simply achieving a high score. The experiments clarified the importance of variance, evaluation methodology, and reproducibility, setting the stage for more rigorous comparisons next week.
+
+---
+
+## Week 20 Update (Andrea)
+
+### Ship Candidate
+Using the configuration stored in:
+`hpo_results/<timestamp>/best_params.json`
+
+(This reflects the final Q-Learning HPO workflow rather than the earlier notebook artifact.)
+
+This config was selected from HPO results based on highest mean reward and stable evaluation performance.
+
+### Reproducibility
+Instructions to reproduce results are documented in:
+`docs/how_to_run_andrea.md`
+
+### Notes
+Week 20 shifted away from notebook-based experimentation.
+All final evaluation and reproducibility steps were executed through
+scripted workflows (`w19d4_starter.py` and `final_eval_qlearning.py`)
+to ensure consistent multi-seed comparison.

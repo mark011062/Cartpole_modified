@@ -70,7 +70,7 @@ def run_in_venv():
     sys.exit(result.returncode)
 
 
-if not is_in_venv():
+if __name__ == "__main__" and not is_in_venv():
     run_in_venv()
 
 # =============================================================================

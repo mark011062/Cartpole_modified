@@ -2,88 +2,111 @@ Contribution Plan – Andrea Churchwell
 
 Team: TeamTwo
 Created: W19D2
-Last Updated: 2026-02-06
+Last Updated: 2026-02-13
 
 Personal Focus
 
-My focus this week was understanding why CartPole results change, not just how to make the number go up. I worked primarily on hyperparameter tuning, result interpretation, and connecting observed performance back to training dynamics (episodes, trials, variance).
+My focus throughout this project was understanding why CartPole performance changes, not just how to increase the reward number. I concentrated on hyperparameter tuning, result interpretation, and connecting observed performance back to training dynamics such as episode budgets, trial counts, and variance across runs.
+
+Rather than chasing a single high score, my goal was to build a workflow that could distinguish stable learning from lucky outcomes.
 
 Problem Context
 
-Early results showed that single runs could produce deceptively high rewards. The main problem I focused on was distinguishing stable improvement from lucky runs, and learning how systematic hyperparameter optimization (HPO) helps reduce that uncertainty.
+Early experiments showed that individual runs could produce deceptively high rewards. Some configurations appeared strong at first but failed to repeat consistently.
+
+The main problem I focused on was learning how to:
+
+Identify when a result is noise versus genuine improvement
+
+Use systematic hyperparameter optimization (HPO) to reduce guesswork
+
+Evaluate performance using structured comparisons instead of isolated runs
 
 Scope of My Work
 What I DID
 
- Ran multiple CartPole experiments to understand baseline variance
+Ran multiple CartPole experiments to understand baseline variance
 
- Observed and documented the impact of “lucky” high-reward runs
+Documented how “lucky” runs can inflate perceived performance
 
- Ran Optuna-based HPO to search hyperparameter space
+Used Optuna to perform structured hyperparameter optimization
 
- Increased episode count and trial count to allow learning to stabilize
+Increased episode budgets and trial counts to allow learning to converge
 
- Interpreted HPO outputs to identify reliable configurations
+Interpreted HPO outputs to identify reliable configurations
 
- Saved best-performing configurations and trial results for review
+Saved best-performing configurations and trial artifacts for reproducibility
+
+Executed a multi-seed A/B evaluation using final_eval_qlearning.py
+
+Generated results/final_eval.csv to compare baseline vs tuned configuration
 
 What I DID NOT Do
 
- Modify algorithm architecture
+Modify the core algorithm architecture
 
- Introduce new RL algorithms
+Introduce entirely new RL algorithms
 
- Claim baseline improvements without validation
+Claim baseline improvements without validation
 
- Finalize team-wide A/B comparisons
+Finalize team-wide merge or PR workflow beyond experimentation
 
-Files I Worked With
-| File                               | Description                                       |
-| ---------------------------------- | ------------------------------------------------- |
-| `w19d4_starter.py`                 | Ran fixed and HPO modes, adjusted episodes/trials |
-| `hpo_results/*/best_params.json`   | Saved best-performing configurations              |
-| `hpo_results/*/all_trials.csv`     | Reviewed Optuna trial distributions               |
-| `hpo_results/progress_report.html` | Visualized learning and comparison history        |
+| File                               | Description                  |
+| ---------------------------------- | ---------------------------- |
+| `w19d4_starter.py`                 | Main training + HPO workflow |
+| `final_eval_qlearning.py`          | Multi-seed evaluation script |
+| `hpo_results/*/best_params.json`   | Saved best configurations    |
+| `hpo_results/*/all_trials.csv`     | Optuna trial distributions   |
+| `hpo_results/progress_report.html` | Visual progress tracking     |
+| `results/final_eval.csv`           | Final A/B evaluation output  |
 
 
-Best HPO configuration achieving consistent high evaluation scores
+Best HPO configuration achieving strong evaluation performance
 
-Optuna trial logs showing performance spread across trials
+Optuna trial logs showing performance spread and search behavior
 
-Progress report comparing multiple runs and configurations
+Progress report visualizing multiple experimental runs
 
-These artifacts support conclusions about stability vs variance rather than a single “best run.”
+Multi-seed evaluation results comparing baseline vs ship candidate
+
+These artifacts support conclusions about stability and variance, rather than relying on a single peak reward.
 
 Key Learnings
 
-High rewards early on can be misleading without repetition.
+High rewards early in training can be misleading without repetition.
 
-Increasing episodes allows the agent time to converge.
+Increasing episode budgets allows the agent to converge more reliably.
 
-Increasing trials allows Optuna to find better regions of the search space.
+Increasing HPO trials helps discover better regions of the parameter space.
 
-HPO is most effective when paired with sufficient training budget.
+HPO works best when paired with sufficient training time.
 
-A solved environment (≥195) does not automatically imply optimal or stable performance.
+Solving CartPole (≥195) does not automatically imply stability.
+
+Multi-seed evaluation is essential for judging real improvement.
 
 Current Limitations
 
-Results have not yet been validated across multiple fixed seeds.
+Variance remains high across seeds even with tuned parameters.
 
-No formal baseline vs ship-candidate A/B test has been completed.
+Some evaluation runs still drop significantly despite strong averages.
 
-Team PR workflow needs further practice and standardization.
+Formal statistical confidence intervals were not implemented.
+
+Team workflow (PR review/merge process) is still developing.
 
 Next Steps
 
-Re-run best configuration across multiple seeds
+Investigate stability improvements (exploration schedule, reward shaping tuning).
 
-Compare against a fixed baseline under identical conditions
+Expand evaluation across additional seeds if time permits.
 
-Document evaluation protocol clearly
+Improve clarity of evaluation reporting and decision criteria.
 
-Support team-level merge and PR cleanup as needed
+Continue refining reproducibility and documentation practices.
 
 Reflection
 
-This week shifted my understanding from “getting a high score” to understanding what the score actually means. The work done here sets the foundation for more rigorous evaluation in Week 20.
+This project shifted my perspective from “getting a high score” to understanding what that score actually represents. The combination of HPO experimentation and multi-seed evaluation helped clarify how reinforcement learning results can vary, and why structured evaluation matters.
+
+The work completed here builds a foundation for more rigorous experimentation moving forward, with a stronger emphasis on reproducibility, stability, and honest interpretation of results.

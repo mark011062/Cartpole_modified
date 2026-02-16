@@ -107,3 +107,10 @@ hpo_results/*
 !hpo_results/progress_report.html
 
 .venv/
+
+# HPO progress artifacts (auto-generated)
+hpo_results/progress_history.json
+hpo_results/progress_report.html
+
+# Optional: ignore venv created by scripts
+.venv_hpo/
